@@ -70,3 +70,50 @@
 	});
 
 })(jQuery);
+
+// Banner slideshow initializer
+(function() {
+	function initBannerSlideshow() {
+		var banner = document.getElementById('banner');
+		if (!banner) return;
+
+		var images = [
+			'images/trinityChurch.jpeg',
+			'images/trinityChurchNew.jpg',
+			'images/trinityChurchSide.jpeg',
+			'images/christmas1.jpeg',
+			'images/christmas2.jpeg',
+		];
+
+		// Create container
+		var container = document.createElement('div');
+		container.className = 'banner-slideshow';
+		// Insert as first child so it sits behind .inner (which has higher z-index)
+		banner.insertBefore(container, banner.firstChild);
+
+		// Create slide elements
+		images.forEach(function(src, i) {
+			var slide = document.createElement('div');
+			slide.className = 'slide' + (i === 0 ? ' show' : '');
+			slide.style.backgroundImage = 'url("' + src + '")';
+			container.appendChild(slide);
+		});
+
+		var slides = container.querySelectorAll('.slide');
+		var idx = 0;
+		var interval = 6000; // ms
+
+		setInterval(function() {
+			slides[idx].classList.remove('show');
+			idx = (idx + 1) % slides.length;
+			slides[idx].classList.add('show');
+		}, interval);
+	}
+
+	// Run on DOMContentLoaded
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initBannerSlideshow);
+	} else {
+		initBannerSlideshow();
+	}
+})();

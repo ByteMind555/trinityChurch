@@ -3162,7 +3162,7 @@
 			}
 
 		#header .logo {
-			font-family: "Verdana", "Helvetica", "Arial", cursive;
+			font-family:  cursive;
 			display: inline-block;
 			height: inherit;
 			left: 0;
@@ -3171,7 +3171,7 @@
 			padding: 0;
 			position: absolute;
 			top: 0;
-			color: #2d32be;
+			color: #fafafb;
 			font-size: 1.75em;
 			text-transform: none;
 			font-weight: normal;
@@ -3397,12 +3397,15 @@
 	#banner {
 		background-color:  #2d32be;
 		color: #2d32be;
-		padding: 13em 0 11em 0;
+		/* Increase banner size and show the full image */
+		padding: 4rem 0; /* reduced padding to avoid excessive spacing */
 		background-color: #0c0c0c;
-		background-image: url("../images/trinityChurch.jpeg");
-		background-size: cover;
+		/* Use contain so the full image is visible; center it and prevent tiling */
+		background-size: contain;
 		background-repeat: no-repeat;
-		background-position: 15% left;
+		background-position: center center;
+		/* Ensure banner is tall enough to show the image */
+		min-height: 60vh;
 		text-align: left;
 		position: relative;
 		z-index: 9999;
@@ -3778,45 +3781,46 @@
 
 		* Box */
 
+	/* Use CSS Grid for thumbnails: 3 columns wide, 2 on medium, 1 on small */
 	.thumbnails {
-		display: -moz-flex;
-		display: -webkit-flex;
-		display: -ms-flex;
-		display: flex;
-		-moz-align-items: stretch;
-		-webkit-align-items: stretch;
-		-ms-align-items: stretch;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem; /* controls both row and column gap */
+		justify-items: stretch;
 		align-items: stretch;
-		-moz-justify-content: center;
-		-webkit-justify-content: center;
-		-ms-justify-content: center;
-		justify-content: center;
-		-moz-flex-wrap: wrap;
-		-webkit-flex-wrap: wrap;
-		-ms-flex-wrap: wrap;
-		flex-wrap: wrap;
+		width: 100%;
 	}
 
 		.thumbnails .box {
-			margin: 0 1em 2em 1em;
-			width: 30%;
+			margin: 0;
+			width: auto; /* grid items size by column */
 		}
 
-			@media screen and (max-width: 1280px) {
+		@media screen and (max-width: 1280px) {
 
-				.thumbnails .box {
-					width: 45%;
-				}
-
+			.thumbnails {
+				grid-template-columns: repeat(2, 1fr);
 			}
 
-			@media screen and (max-width: 736px) {
+		}
 
-				.thumbnails .box {
-					width: 100%;
-				}
+		@media screen and (max-width: 736px) {
 
+			.thumbnails {
+				grid-template-columns: 1fr;
 			}
+
+			/* Make table-based grid responsive: stack cells on small screens */
+			.video-grid,
+			.video-grid tr,
+			.video-grid td {
+				display: block;
+				width: 100%;
+			}
+
+			.video-grid td { padding: 0.75rem 0; }
+
+		}
 /* Footer */
 
 	#footer {
@@ -4095,3 +4099,11 @@
 .home-link { display:inline-block; margin-top:1.25rem; padding:0.6rem 1rem; background:#262262; color:#fff; text-decoration:none; border-radius:4px; }
 
 /* end consolidated custom styles */
+
+/* Banner slideshow helper styles */
+#banner { overflow: hidden; }
+#banner .inner { position: relative; z-index: 2; }
+.banner-slideshow { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.banner-slideshow .slide { position: absolute; inset: 0; background-size: contain; background-repeat: no-repeat; background-position: center center; opacity: 0; transition: opacity 0.8s ease; }
+.banner-slideshow .slide.show { opacity: 1; }
+
