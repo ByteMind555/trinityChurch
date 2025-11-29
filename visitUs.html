@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<!-- Visit Us - Trinity Church Pakuranga -->
+<html>
+  <head>
+    <title>Visit Us - Trinity Church Pakuranga</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+
+    <!-- Header (copied nav from existing site) -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="logo">Trinity Church Pakuranga</a>
+        <nav id="nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="under-construction.html">Events</a>
+          <a href="churchOnline.html">Church Online</a>
+          <a href="under-construction.html">Give</a>
+          <a href="visitUs.html">Visit us</a>
+        </nav>
+      </div>
+    </header>
+    <a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+    <!-- Page intro -->
+    <section id="one">
+      <div class="inner">
+        <header>
+          <h2>Visit us</h2>
+        </header>
+        <p>We're located at 474 Pakuranga Road, Half Moon Bay, Auckland 2012. Use the embedded map below or get turn-by-turn directions from your location.</p>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <div class="map-container">
+        <iframe
+          title="Trinity Church Pakuranga - map"
+          src="https://www.google.com/maps?q=474+Pakuranga+Road,+Half+Moon+Bay,+Auckland+2012&output=embed"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="directions-panel">
+        <form id="directionsForm" onsubmit="return openDirections();">
+          <label for="origin" class="visually-hidden">Your start address</label>
+          <input id="origin" type="text" placeholder="Enter your start address (e.g. your suburb or street)" />
+          <button type="submit">Get directions</button>
+        </form>
+        <div class="directions-note">If you leave the start address blank the full Google Maps page will open so you can pick your location/device will auto-detect.</div>
+      </div>
+    </div>
+
+    <!-- Footer (copied from project) -->
+    <footer id="footer">
+      <ul class="icons">
+        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+      </ul>
+      <div class="copyright" style="text-align: center;"> 
+          © 2025 Trinity Church Pakuranga
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Builds a Google Maps directions URL and opens it in a new tab.
+      function openDirections() {
+        var origin = document.getElementById('origin').value.trim();
+        var destination = '474 Pakuranga Road, Half Moon Bay, Auckland 2012';
+        // Use Google Maps Directions URL (web)
+        var base = 'https://www.google.com/maps/dir/?api=1';
+        var url = base + '&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(destination);
+        // If origin is empty, open the place page instead (so user/device can use geolocation)
+        if (!origin) {
+          url = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(destination);
+        }
+        window.open(url, '_blank');
+        return false; // prevent form submit
+      }
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
